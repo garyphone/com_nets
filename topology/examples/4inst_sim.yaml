@@ -1,0 +1,194 @@
+heat_template_version: 2015-04-30
+
+description: This HOT is a simple three nodes network.
+
+resources:
+
+  internal_net1:
+    type: OS::Neutron::Net
+
+    properties:
+      name: internal_net1
+  internal_subnet1:
+    type: OS::Neutron::Subnet
+    properties:
+      name: internal_subnet1
+      network_id: { get_resource: internal_net1 }
+      cidr: "10.20.0.0/24"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+      host_routes:
+        - {"destination": "10.40.0.0/24", "nexthop": "10.20.0.10"}
+        - {"destination": "10.60.0.0/24", "nexthop": "10.20.0.10"}
+        - {"destination": "10.80.0.0/24", "nexthop": "10.20.0.10"}
+
+  internal_net2:
+    type: OS::Neutron::Net
+
+    properties:
+      name: internal_net2
+  internal_subnet2:
+    type: OS::Neutron::Subnet
+    properties:
+      name: internal_subnet2
+      network_id: { get_resource: internal_net2 }
+      cidr: "10.40.0.0/24"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+      host_routes:
+        - {"destination": "10.20.0.0/24", "nexthop": "10.40.0.40"}
+        - {"destination": "10.60.0.0/24", "nexthop": "10.40.0.10"}
+        - {"destination": "10.80.0.0/24", "nexthop": "10.40.0.10"}
+
+  internal_net3:
+    type: OS::Neutron::Net
+
+    properties:
+      name: internal_net3
+  internal_subnet3:
+    type: OS::Neutron::Subnet
+    properties:
+      name: internal_subnet3
+      network_id: { get_resource: internal_net3 }
+      cidr: "10.60.0.0/24"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+      host_routes:
+        - {"destination": "10.20.0.0/24", "nexthop": "10.60.0.40"}
+        - {"destination": "10.40.0.0/24", "nexthop": "10.60.0.40"}
+        - {"destination": "10.80.0.0/24", "nexthop": "10.60.0.10"}
+
+  internal_router1:
+    type: OS::Neutron::Router
+
+    properties:
+      name: internal_router1
+  internal_rinterface1:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router1 }
+      port: { get_resource: instancer1_port0 }
+
+  internal_rinterface11:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router1 }
+      port: { get_resource: instancer1_port1 }
+
+  instancer1_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: internal_net1 }
+      fixed_ips:
+        - ip_address: "10.20.0.10"
+
+  instancer1_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: internal_net2 }
+      fixed_ips:
+        - ip_address: "10.40.0.40"
+
+  internal_router2:
+    type: OS::Neutron::Router
+
+    properties:
+      name: internal_router2
+  internal_rinterface2:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router2 }
+      port: { get_resource: instancer2_port0 }
+
+  internal_rinterface22:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router2 }
+      port: { get_resource: instancer2_port1 }
+
+  instancer2_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: internal_net2 }
+      fixed_ips:
+        - ip_address: "10.40.0.10"
+
+  instancer2_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: internal_net3 }
+      fixed_ips:
+        - ip_address: "10.60.0.40"
+
+  instance1_port0:
+    type: OS::Neutron::Port
+    properties:
+      name: instance1
+      network: private
+      fixed_ips:
+        - ip_address: "10.0.0.11"
+
+  instance1_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: {get_resource: internal_net1 }
+      fixed_ips:
+        - ip_address: "10.20.0.3"
+
+  instance1:
+    type: OS::Nova::Server
+    properties:
+      image: cirros-0.3.4-x86_64-uec
+      flavor: m1.micro
+      networks:
+        - port: { get_resource: instance1_port0 }
+        - port: { get_resource: instance1_port1 }
+
+  instance2_port0:
+    type: OS::Neutron::Port
+    properties:
+      name: instance2
+      network: private
+      fixed_ips:
+        - ip_address: "10.0.0.12"
+
+  instance2_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: {get_resource: internal_net2 }
+      fixed_ips:
+        - ip_address: "10.40.0.3"
+
+  instance2:
+    type: OS::Nova::Server
+    properties:
+      image: cirros-0.3.4-x86_64-uec
+      flavor: m1.micro
+      networks:
+        - port: { get_resource: instance2_port0 }
+        - port: { get_resource: instance2_port1 }
+
+  instance3_port0:
+    type: OS::Neutron::Port
+    properties:
+      name: instance3
+      network: private
+      fixed_ips:
+        - ip_address: "10.0.0.13"
+
+  instance3_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: {get_resource: internal_net3 }
+      fixed_ips:
+        - ip_address: "10.60.0.3"
+
+  instance3:
+    type: OS::Nova::Server
+    properties:
+      image: cirros-0.3.4-x86_64-uec
+      flavor: m1.micro
+      networks:
+        - port: { get_resource: instance3_port0 }
+        - port: { get_resource: instance3_port1 }
+

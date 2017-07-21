@@ -1,0 +1,239 @@
+heat_template_version: 2015-04-30
+
+description: Arpanet 1968.12 version
+resources:
+
+  
+  internal_router1:
+    type: OS::Neutron::Router
+
+    properties:
+      name: internal_router1
+  internal_rinterface1:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router1 }
+      port: { get_resource: instancer1_port0 }
+
+  internal_rinterface11:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router1 }
+      port: { get_resource: instancer1_port1 }
+
+  instancer1_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node1 }
+      fixed_ips:
+        - ip_address: "10.10.0.10"
+
+  instancer1_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node2 }
+      fixed_ips:
+        - ip_address: "10.20.0.10"
+
+  internal_router2:
+    type: OS::Neutron::Router
+
+    properties:
+      name: internal_router2
+  internal_rinterface2:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router2 }
+      port: { get_resource: instancer2_port0 }
+
+  internal_rinterface22:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router2 }
+      port: { get_resource: instancer2_port1 }
+
+  instancer2_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node1 }
+      fixed_ips:
+        - ip_address: "10.10.0.30"
+
+  instancer2_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node3 }
+      fixed_ips:
+        - ip_address: "10.30.0.30"
+
+  internal_router3:
+    type: OS::Neutron::Router
+
+    properties:
+      name: internal_router3
+  internal_rinterface3:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router3 }
+      port: { get_resource: instancer3_port0 }
+
+  internal_rinterface33:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router3 }
+      port: { get_resource: instancer3_port1 }
+
+  instancer3_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node1 }
+      fixed_ips:
+        - ip_address: "10.10.0.50"
+
+  instancer3_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node4 }
+      fixed_ips:
+        - ip_address: "10.40.0.50"
+
+  internal_router4:
+    type: OS::Neutron::Router
+
+    properties:
+      name: internal_router4
+  internal_rinterface4:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router4 }
+      port: { get_resource: instancer4_port0 }
+
+  internal_rinterface44:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router4 }
+      port: { get_resource: instancer4_port1 }
+
+  instancer4_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node2 }
+      fixed_ips:
+        - ip_address: "10.20.0.30"
+
+  instancer4_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node3 }
+      fixed_ips:
+        - ip_address: "10.30.0.10"
+
+  Node1:
+    type: OS::Neutron::Net
+
+    properties:
+      name: SRI
+  Ne1:
+    type: OS::Neutron::Subnet
+    properties:
+      name: SRI
+      cidr: "10.10.0.0/24"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+      host_routes:
+        - {"destination": "10.20.0.0/24", "nexthop": "10.10.0.10"}
+        - {"destination": "10.30.0.0/24", "nexthop": "10.10.0.30"}
+        - {"destination": "10.40.0.0/24", "nexthop": "10.10.0.50"}
+      network_id: {get_resource: Node1}
+
+  Node2:
+    type: OS::Neutron::Net
+
+    properties:
+      name: USCB
+  Ne2:
+    type: OS::Neutron::Subnet
+    properties:
+      name: USCB
+      network_id: { get_resource: Node2 }
+      cidr: "10.20.0.0/24"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+      host_routes:
+        - {"destination": "10.10.0.0/24", "nexthop": "10.20.0.10"}
+        - {"destination": "10.30.0.0/24", "nexthop": "10.20.0.30"}
+        - {"destination": "10.40.0.0/24", "nexthop": "10.20.0.50"}
+
+  Node3:
+    type: OS::Neutron::Net
+
+    properties:
+      name: UCLA
+  Ne3:
+    type: OS::Neutron::Subnet
+    properties:
+      name: UCLA
+      network_id: { get_resource: Node3 }
+      cidr: "10.30.0.0/24"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+      host_routes:
+        - {"destination": "10.10.0.0/24", "nexthop": "10.30.0.30"}
+        - {"destination": "10.20.0.0/24", "nexthop": "10.30.0.10"}
+        - {"destination": "10.40.0.0/24", "nexthop": "10.30.0.50"}
+
+  Node4:
+    type: OS::Neutron::Net
+
+    properties:
+      name: UTAH
+  Ne4:
+    type: OS::Neutron::Subnet
+    properties:
+      name: UTAH
+      network_id: { get_resource: Node4 }
+      cidr: "10.40.0.0/24"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+      host_routes:
+        - {"destination": "10.10.0.0/24", "nexthop": "10.40.0.50"}
+        - {"destination": "10.20.0.0/24", "nexthop": "10.40.0.10"}
+        - {"destination": "10.30.0.0/24", "nexthop": "10.40.0.30"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

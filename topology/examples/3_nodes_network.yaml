@@ -1,0 +1,121 @@
+description: 3 nodes network
+heat_template_version: '2015-04-30'
+resources:
+  Node1:
+    type: OS::Neutron::Net
+    properties: {name: Berlin}
+  Ne1:
+    type: OS::Neutron::Subnet
+    properties:
+      name: Berlin
+      network_id: { get_resource: Node1 }
+      cidr: 10.20.0.0/24
+      host_routes:
+        - {destination: 10.40.0.0/24, nexthop: 10.20.0.10}
+        - {destination: 10.60.0.0/24, nexthop: 10.20.0.40}
+  Node2:
+    type: OS::Neutron::Net
+    properties:
+      name: Frankfurt
+  Ne2:
+    type: OS::Neutron::Subnet
+    properties:
+      name: Frankfurt
+      network_id: { get_resource: Node2 }
+      cidr: 10.40.0.0/24
+      host_routes:
+        - {destination: 10.20.0.0/24, nexthop: 10.40.0.40}
+        - {destination: 10.60.0.0/24, nexthop: 10.40.0.10}
+  Node3:
+    type: OS::Neutron::Net
+    properties:
+      name: Munich
+  Ne3:
+    type: OS::Neutron::Subnet
+    properties:
+      name: Munich
+      network_id: { get_resource: Node3 }
+      cidr: 10.60.0.0/24
+      host_routes:
+        - {"destination": "10.20.0.0/24", "nexthop": "10.60.0.10"}
+        - {"destination": "10.40.0.0/24", "nexthop": "10.60.0.40"}
+  internal_router1:
+    type: OS::Neutron::Router
+    properties:
+      name: internal_router1
+  internal_rinterface1:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router1 }
+      port: { get_resource: instancer1_port0 }
+  internal_rinterface11:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router1 }
+      port: { get_resource: instancer1_port1 }
+  instancer1_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node1 }
+      fixed_ips:
+        - ip_address: 10.20.0.10
+  instancer1_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node2 }
+      fixed_ips:
+        - ip_address: 10.40.0.40
+  internal_router2:
+    type: OS::Neutron::Router
+    properties:
+      name: internal_router2
+  internal_rinterface2:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router2 }
+      port: { get_resource: instancer2_port0 }
+  internal_rinterface22:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router2 }
+      port: { get_resource: instancer2_port1 }
+  instancer2_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node1 }
+      fixed_ips:
+        - ip_address: 10.20.0.40
+  instancer2_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node3 }
+      fixed_ips:
+        - ip_address: 10.60.0.10
+  internal_router3:
+    type: OS::Neutron::Router
+    properties:
+      name: internal_router3
+  internal_rinterface3:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router3 }
+      port: { get_resource: instancer3_port0 }
+  internal_rinterface33:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: internal_router3 }
+      port: { get_resource: instancer3_port1 }
+  instancer3_port0:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node2 }
+      fixed_ips:
+        - ip_address: "10.40.0.10"
+  instancer3_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_resource: Node3 }
+      fixed_ips:
+        - ip_address: "10.60.0.40"
+
+
