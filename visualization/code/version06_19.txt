@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Visualization" %}{% endblock %}
+
+{% block main %}
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  background: #fcfcfa;
+}
+
+.stroke {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.fill {
+  fill: #fff;
+}
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-width: .5px;
+  stroke-opacity: .5;
+}
+
+.land {
+  fill: #bbb;
+}
+
+.boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.points circle {
+  fill: #fff;
+  stroke: red;
+  stroke-width: 2px;
+}
+
+.points text {
+  font: 11px sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+
+.route {
+  fill: none;
+  stroke: blue;
+  stroke-width: 2px;
+}
+
+.arcs{
+			fill:none;
+			stroke:orange;
+		}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 570;
+
+var projection = d3.geo.kavrayskiy7()
+    .scale(170)
+    .rotate([-40, 0])
+    .translate([width / 2, height / 2])
+    .precision(.1);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var graticule = d3.geo.graticule();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .call(d3.behavior.zoom().on("zoom", function () {
+        svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
+      }))
+    .append("g");
+
+svg.append("defs").append("path")
+    .datum({type: "Sphere"})
+    .attr("id", "sphere")
+    .attr("d", path);
+
+svg.append("use")
+    .attr("class", "stroke")
+    .attr("xlink:href", "#sphere");
+
+svg.append("use")
+    .attr("class", "fill")
+    .attr("xlink:href", "#sphere");
+
+svg.append("path")
+    .datum(graticule)
+    .attr("class", "graticule")
+    .attr("d", path);
+
+var g1 = svg.append('g');
+var g2 = svg.append('g');
+
+d3.json("https://d3js.org/world-50m.v1.json", function(error, world) {
+  if (error) throw error;
+
+  svg.insert("path", ".graticule")
+      .datum(topojson.feature(world, world.objects.land))
+      .attr("class", "land")
+      .attr("d", path);
+
+  svg.insert("path", ".graticule")
+      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+      .attr("class", "boundary")
+      .attr("d", path);
+});
+
+d3.select(self.frameElement).style("height", height + "px");
+
+d3.json("https://quarkbackend.com/getfile/otto-gao24/places-json", function(error,cities) {
+
+		// append some cities:
+		g2.selectAll(".cities")
+		  .data(d3.entries(cities))
+		  .enter()
+		  .append("circle")
+		  .attr("transform",function(d) { console.log(d.value); return "translate("+ projection(d.value) + ')'; })
+		  .attr("r",1.5)
+		  .attr("fill","white")
+		  .attr("stroke","steelblue")
+      .append("text")
+      .attr("y", 10)
+      .attr("dy", ".71em")
+      .text(function(d) { console.log(d.key); return d.key; });
+
+		// now load the route data:
+		d3.json("https://quarkbackend.com/getfile/otto-gao24/routes-json", function(error, routes) {
+
+			g1.selectAll(".routes")
+			  .data(routes)
+			  .enter()
+			  .append("path")
+			  .attr("class","arcs")
+			  .attr("d", function(d) {
+				return lngLatToArc(cities, d.source,d.target, 0);
+			  });
+
+		});
+
+	});
+
+
+
+
+function lngLatToArc(d, sourceName, targetName, bend){
+		// If no bend is supplied, then do the plain square root
+		bend = bend || 1;
+		// `d[sourceName]` and `d[targetname]` are arrays of `[lng, lat]`
+		// Note, people often put these in lat then lng, but mathematically we want x then y which is `lng,lat`
+
+		var sourceLngLat = d[sourceName],
+				targetLngLat = d[targetName];
+
+		if (targetLngLat && sourceLngLat) {
+			var sourceXY = projection( sourceLngLat ),
+					targetXY = projection( targetLngLat );
+
+			// Uncomment this for testing, useful to see if you have any null lng/lat values
+			// if (!targetXY) console.log(d, targetLngLat, targetXY)
+			var sourceX = sourceXY[0],
+					sourceY = sourceXY[1];
+
+			var targetX = targetXY[0],
+					targetY = targetXY[1];
+
+			var dx = targetX - sourceX,
+					dy = targetY - sourceY,
+					dr = Math.sqrt(dx * dx + dy * dy)*bend;
+
+			// To avoid a whirlpool effect, make the bend direction consistent regardless of whether the source is east or west of the target
+			var west_of_source = (targetX - sourceX) < 0;
+			if (west_of_source) return "M" + targetX + "," + targetY + "A" + dr + "," + dr + " 0 0,1 " + sourceX + "," + sourceY;
+			return "M" + sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
+
+		} else {
+			return "M0,0,l0,0z";
+		}
+	}
+
+
+
+</script>
+
+{% endblock %}
+
