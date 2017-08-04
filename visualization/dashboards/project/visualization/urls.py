@@ -14,9 +14,10 @@
 
 from django.conf.urls import url
 
+# the path of the panel must be fixed with the panel name in order we can search the template index
 from openstack_dashboard.dashboards.project.visualization import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
-
+    # index.html, the function has already been defined in the OpenStack environment
 ]
