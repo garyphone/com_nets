@@ -16,8 +16,14 @@ from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from horizon import exceptions
-from horizon import forms
+# default setting, if you want to load some information in the end, 
+# you will interact them by using these django structure setting.
+# In my situation, the visualization part only shows the data in the website.
+# But the structure I should keep them, so I use the identity.roles as a default setting,
+# it does not play any roles.
+
+from horizon import exceptions 
+from horizon import forms      
 from horizon import messages
 from horizon import tables
 from horizon.utils import memoized

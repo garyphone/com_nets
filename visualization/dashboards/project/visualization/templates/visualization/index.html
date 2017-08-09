@@ -3,280 +3,255 @@
 {% block title %}{% trans "Visualization" %}{% endblock %}
 
 {% block main %}
-<!DOCTYPE html>
-<meta charset="utf-8">
-<head>
-	<script src="http://colorbrewer2.org/export/colorbrewer.js"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
 
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js">
-</head>
+<!DOCTYPE html>
+
+<meta charset="utf-8">
 <style>
 
+body {
+  background: #fcfcfa;
+}
 
-.canton-boundary {
+.stroke {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.fill {
+  fill: #fff;
+}
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-width: .5px;
+  stroke-opacity: .5;
+}
+
+.land {
+  fill: #bbb;
+}
+
+.boundary {
   fill: none;
   stroke: #fff;
-  stroke-linejoin: round;
+  stroke-width: .5px;
 }
 
-text {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10px;
+.points circle {
+  fill: #fff;
+  stroke: red;
+  stroke-width: 2px;
+}
+
+.points text {
+  font: 11px sans-serif;
   text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
 }
 
+.route {
+  fill: none;
+  stroke: blue;
+  stroke-width: 0.2px;
+}
 
-.d3-tip {
-			  line-height: 1;
-			  font-weight: bold;
-			  padding: 12px;
-			  background: black;
-			  color: #fff;
-			  border-radius: 2px;
-			  opacity: 0.001%;
-			}
-			.d3-tip:after {
-			  box-sizing: border-box;
-			  display: inline;
-			  font-size: 10px;
-			  width: 100%;
-			  line-height: 1;
-			  color: black;
-			  content: "\25BC";
-			  position: absolute;
-			  text-align: center;
-			  opacity: 0.001%;
-			}
+.arcs{
+	fill:none;
+	stroke:orange;
+  stroke-width: 0.2px;
+}
 
-			.d3-tip.n:after {
-			  margin: -1px 0 0 0;
-			  top: 100%;
-			  left: 0;
-			  opacity: 0.001%;
-			}
-			.area:hover {
-				fill: brown;
-			}
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 50px;
+  padding: 2px;
+  font: 10px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  /*pointer-events: none; //if we need a link, we should remove it*/ 
+}
 
 </style>
 <body>
-
-
-
-	</script>
-
-
-					<div id = "map" style = "float : left; min-width:320px;width :50%;height : 600px">
-						<div id="subtitle"></div>
-							</div>
-
-
-
-
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
 <script>
-var places = [
-              {
-                name: "1 Gorkha Rifles",
-				nam: "https://en.wikipedia.org/wiki/1_Gorkha_Rifles",
-                location: {
-                  latitude: 30.975441,
-                  longitude: 76.990228
-                }
-              },
-              {
-                name: "3 Gorkha Rifles",
-				nam: "https://en.wikipedia.org/wiki/3_Gorkha_Rifles",
-                location: {
-                  latitude: 25.317645,
-                  longitude:82.973914
-                }
-              }
-			  ,
-              {
-                name: "5 Gorkha Rifles",
-                nam: "https://en.wikipedia.org/wiki/5_Gorkha_Rifles",
-				location: {
-                  latitude: 25.578773,
-                  longitude:91.893254
-                }
-              }
-			  ,
-              {
-                name: "11 Gorkha Rifles",
-                nam: "https://en.wikipedia.org/wiki/11_Gorkha_Rifles",
-				location: {
-                  latitude: 26.846694,
-                  longitude: 80.946166
-                }
-              }
-			  ,
-              {
-                name: "Gharwal Rifles",
-                nam: "https://en.wikipedia.org/wiki/Gharwal_Rifles",
-				location: {
-                  latitude: 29.837746,
-                  longitude: 78.687107
-                }
-              }
-			  ,
-              {
-                name: "Brigade of the Guards",
-                nam: "https://en.wikipedia.org/wiki/Brigade_of_the_Guards",
-				location: {
-                  latitude: 21.227531,
-                  longitude: 79.190083
-                }
-              }
-			  ,
-              {
-                name: "Bihar Regiment",
-				nam: "https://en.wikipedia.org/wiki/Bihar_Regiment",
-                location: {
-                  latitude: 25.620667,
-                  longitude: 85.049325
-                }
-              }
-			  ,
-              {
-                name: "Parachute Regiment",
-                nam: "https://en.wikipedia.org/wiki/Parachute_Regiment",
-				location: {
-                  latitude: 12.971599,
-                  longitude: 77.594563
-                }
-              }
-			  ,
-              {
-                name: "Ramgarh Cantonment",
-                nam: "https://en.wikipedia.org/wiki/Ramgarh_Cantonment",
-				location: {
-                  latitude:23.633224,
-                  longitude: 85.514874
-                }
-              }
-			  ,
-              {
-                name: "Madras Regiment",
-                nam: "https://en.wikipedia.org/wiki/Madras_Regiment",
-				location: {
-                  latitude: 11.363560,
-                  longitude: 76.788471
-                }
-              }
-			  ,
-              {
-                name: "Grenadiers Regiment",
-                nam: "https://en.wikipedia.org/wiki/Grenadiers_Regiment",
-				location: {
-                  latitude: 23.181467,
-                  longitude: 79.986407
-                }
-              }
-			  ,
-              {
-                name: "Maratha Light Infantry",
-                nam: "https://en.wikipedia.org/wiki/Maratha_Light_Infantry",
-				location: {
-                  latitude: 15.849695,
-                  longitude: 74.497674
-                }
-              },
-              {
-                name: "Rajputana Rifles",
-                nam: "https://en.wikipedia.org/wiki/Rajputana_Rifles",
-				location: {
-                  latitude: 28.596128,
-                  longitude: 77.158738
-                }
-              },
-              {
-                name: "Kumaon Regiment",
-                nam: "https://en.wikipedia.org/wiki/Kumaon_Regiment",
-				location: {
-                  latitude: 29.643362,
-                  longitude: 79.432182
-                }
-              }
-			  ,
-              {
-                name: "Sikh Light Infantry",
-                nam: "https://en.wikipedia.org/wiki/Sikh_Light_Infantry",
-				location: {
-                  latitude: 27.367290,
-                  longitude: 79.622137
-                }
-              }
-            ]
+
 var width = 960,
-    height = 600;
-var color= d3.scale.ordinal()
-			.domain([1,2,3,4,5,6,7,8,9])
-			.range(colorbrewer.Oranges[9]);
+    height = 570;
 
-/*var projection = d3.geo.mercator()
-    .scale(800)
-    .translate([-500,600]);*/
+var projection = d3.geo.kavrayskiy7()
+    .scale(170)
+    .rotate([-40, 0])
+    .translate([width / 2, height / 2])
+    .precision(.1);
 
-<!--  -->
-
-var projection = d3.geo.mercator().scale(1100).translate([-1000,800]);
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select("#map").append("svg")
-    .attr("viewBox", "0 0 900 800")
-	 .attr("preserveAspectRatio", "xMidYMid meet");
-var data;
-d3.json("https://quarkbackend.com/getfile/otto-gao24/test-json", function(error, swiss) {
+var graticule = d3.geo.graticule();
+
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .call(d3.behavior.zoom().on("zoom", function () {
+        svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
+      }))
+    .append("g");
+
+svg.append("defs").append("path")
+    .datum({type: "Sphere"})
+    .attr("id", "sphere")
+    .attr("d", path);
+
+svg.append("use")
+    .attr("class", "stroke")
+    .attr("xlink:href", "#sphere");
+
+svg.append("use")
+    .attr("class", "fill")
+    .attr("xlink:href", "#sphere");
+
+svg.append("path")
+    .datum(graticule)
+    .attr("class", "graticule")
+    .attr("d", path);
+
+var g1 = svg.append('g');
+var g2 = svg.append('g');
+
+d3.json("https://d3js.org/world-50m.v1.json", function(error, world) {
   if (error) throw error;
 
-  var cantons = topojson.feature(swiss, swiss.objects.india);
+  svg.insert("path", ".graticule")
+      .datum(topojson.feature(world, world.objects.land))
+      .attr("class", "land")
+      .attr("d", path);
 
-  			//svg.call(tip);
-			var group=svg.selectAll("g")
-				.data(cantons.features)
-				.enter()
-				.append("g");
-				//.on('mouseover', tip.show)
-      			//.on('mouseout', tip.hide)
+  svg.insert("path", ".graticule")
+      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+      .attr("class", "boundary")
+      .attr("d", path);
+});
 
+d3.select(self.frameElement).style("height", height + "px");
 
-					var tip = d3.tip()
-							.attr('class', 'd3-tip')
-							.offset([-5, 0])
-							.style("left", "300px")
-							.style("top", "400px")
-							.html(function(d) {
-								return ("<a href="+d.nam+" target='_blank'>"+d.name +"</a>");
-							})
+d3.json("{% url 'horizon:project:network_topology:json' %}", function(data) {
 
-						svg.call(tip);
+  var testLength = data.networks.length;
 
+  console.log(data);
 
-svg.selectAll(".pin")
-						  .data(places)
-						  .enter().append("circle", ".pin")
-						  .attr("r", 5)
-						  .attr("transform", function(d) {
-							return "translate(" + projection([
-							  d.location.longitude,
-							  d.location.latitude
-							]) + ")";
-						  })
-						  .on('mouseover', tip.show)
-							.on('click', tip.hide);
+  function getPlaces() {
+    if (testLength > 2) {
+      return places = {% include "project/visualization/places.json" %};
+    }
+  }
 
-				//var projection = d3.geo.mercator().scale(900).translate([-600,700]);
-				var path= d3.geo.path().projection(projection);
+  function getRoutes() {
+    if (testLength > 2) {
+      return routes = {% include "project/visualization/routes.json" %};
+    }
+  }
 
-				var areas= group.append("path")
-					.attr("d", path)
-					.attr("class", "area")
-				 .attr("fill","steelblue");
+  var places = getPlaces();
+
+  var routes = getRoutes();
+
+  var json1 = data.networks;//show networks properties
+
+  console.log(json1);
+
+  json1.forEach(function(d) {
+    d.lat = places[d.name] ? places[d.name][1] : null;
+    d.lon = places[d.name] ? places[d.name][0] : null
+  });
+
+  g2.selectAll(".details")
+    .data(d3.entries(json1))
+    .enter()
+    .append("circle")
+    .attr("r",0.5)
+    .attr("transform",function(d) { return "translate("+ projection([
+        d.value.lon,
+        d.value.lat
+    ]) + ')'; })
+    .attr("fill","white")
+    .attr("stroke","steelblue")
+    .on("mouseover", function(d) {
+        div.transition()
+           .duration(200)
+           .style("opacity", .9);
+        div .html(
+            '<a href= "' + d.value.url + '">' + //with a link
+              d.value.name +"</a>" + "<br/>" + d.value.status)
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 30) + "px");
+    })
+    .on("mouseout", function(d) {
+        div.transition()
+           .duration(1000)
+           .style("opacity", 0);
+    });
+
+    g1.selectAll(".routes")
+  		.data(routes)
+  		.enter()
+  		.append("path")
+  		.attr("class","arcs")
+  		.attr("d", function(d) {
+  		    return lngLatToArc(places, d.source,d.target, 0);
+  		});
 
 });
+
+function lngLatToArc(d, sourceName, targetName, bend){
+		// If no bend is supplied, then do the plain square root
+		bend = bend || 1;
+		// `d[sourceName]` and `d[targetname]` are arrays of `[lng, lat]`
+		// Note, people often put these in lat then lng, but mathematically we want x then y which is `lng,lat`
+
+		var sourceLngLat = d[sourceName],
+				targetLngLat = d[targetName];
+
+		if (targetLngLat && sourceLngLat) {
+			var sourceXY = projection( sourceLngLat ),
+					targetXY = projection( targetLngLat );
+
+			// Uncomment this for testing, useful to see if you have any null lng/lat values
+			// if (!targetXY) console.log(d, targetLngLat, targetXY)
+			var sourceX = sourceXY[0],
+					sourceY = sourceXY[1];
+
+			var targetX = targetXY[0],
+					targetY = targetXY[1];
+
+			var dx = targetX - sourceX,
+					dy = targetY - sourceY,
+					dr = Math.sqrt(dx * dx + dy * dy)*bend;
+
+			// To avoid a whirlpool effect, make the bend direction consistent regardless of whether the source is east or west of the target
+			var west_of_source = (targetX - sourceX) < 0;
+			if (west_of_source) return "M" + targetX + "," + targetY + "A" + dr + "," + dr + " 0 0,1 " + sourceX + "," + sourceY;
+			return "M" + sourceX + "," + sourceY + "A" + dr + "," + dr + " 0 0,1 " + targetX + "," + targetY;
+
+		} else {
+			return "M0,0,l0,0z";
+		}
+	}
+
 </script>
 
 {% endblock %}
+
