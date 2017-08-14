@@ -122,9 +122,65 @@ Using Iperf, you can also test the maximum throughput achieved via UDP connectio
      ```
      Now that is considerably better than the 1.05 Mbits/sec we were seeing earlier!
 
+## Quality of Service (QoS)
 
+QoS is defined as the ability to guarantee certain network requirements like bandwidth, latency, jitter and reliability in order to satisfy a Service Level Agreement (SLA) between an application provider and end users.
 
+### Configuration
 
+To enable the service, you should change the local.conf in devstack in order to build the OpenStack service automatically. The local.conf setting you can see my data in the Github. It is simple to find the setting codes to enable the service.
+
+### User Workflow
+
+  1. Create a QoS policy and its bandwidth limit rule:
+     ```
+     >>neutron qos-policy-create bw-limiter
+     >>neutron qos-bandwidth-limit-rule-create bw-limiter --max-kbps 3000 --max-burst-kbps 300
+     ```
+  > Note: The burst value is given in kilobits, not in kilobits pro second as the name of the parameter might suggest. This is an amount of data which can be sent before the bandwidth limit applies.
+
+  2. Associate the created policy with an existing neutron port. In order to do this, user extracts the port id to be associate to the already created policy. In the next example, we will assign the bw-limiter policy to the VM with IP address 10.0.0.3
+     ```
+     >>neutron port-list
+     >>neutron port-update 88101e57-76fa-4d12-b0e0-4fc7634b874a --qos-policy bw-limiter
+     ```
+
+  3. In order to detach a port from the QoS policy, simply update again the port configuration.
+     ```
+     >>neutron port-update 88101e57-76fa-4d12-b0e0-4fc7634b874a --no-qos-policy
+     ```
+     Port can be created with a policy attached to them too.
+     ```
+     >>neutron port-create private --qos-policy-id bw-limiter
+     ```
+
+  4. You can attach networks to a QoS policy. The meaning of this is that any compute port connected to the network will use the network policy by default unless the port has a specific policy attached to it. Network owned ports like DHCP and router ports are excluded from network policy application.
+     In order to attach a QoS policy to a network, update an existing network, or initially create the network attached to the policy.
+     ```
+     >>neutron net-update private --qos-policy bw-limiter
+     ```
+  > Note: Configuring the proper burst value is very important. If the burst value is set too low, bandwidth usage will be throttled even with a proper bandwidth limit setting. If the configured burst value is too low, achieved bandwidth limit will be lower than expected. If the configured burst value is too high, too few packets could be limited and achieved bandwidth limit would be higher than expected. 
+
+### Rule Modification
+
+  1. You can modify rules at runtime. Rule modifications will be propagated to any attached port.
+     ```
+     >>neutron qos-bandwidth-limit-rule-update 92ceb52f-170f-49d0-9528-976e2fee2d6f bw-limiter --max-kbps 2000 --max-burst-kbps 200
+     ```
+
+  2. Just like with bandwidth limiting, create a policy for DSCP marking rule:
+     ```
+     >>neutron qos-policy-create dscp-marking
+     ```
+
+  3. You can create, update, list, delete, and show DSCP markings with the neutron client:
+     ```
+     >>neutron qos-dscp-marking-rule-create dscp-marking --dscp-mark 26
+     >>neutron qos-dscp-marking-rule-update 115e4f70-8034-4176-8fe9-2c47f8878a7d dscp-marking --dscp-mark 22
+     >>neutron qos-dscp-marking-rule-show 115e4f70-8034-4176-8fe9-2c47f8878a7d dscp-marking
+     >>neutron qos-dscp-marking-rule-delete 115e4f70-8034-4176-8fe9-2c47f8878a7d dscp-marking
+     >>neutron qos-dscp-marking-rule-list
+     ```
 
 
 
