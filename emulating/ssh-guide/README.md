@@ -15,7 +15,7 @@ If you haven’t created a key before, start with creating a Keypair in OpenStac
   4. Choose a Keypair Name
  
   5. You will now be asked to save a .pem file. Save the file on a convenient location. You won’t 
-     be able to download it again.
+     be able to download it again
 
   6. Open a terminal
 
@@ -49,7 +49,24 @@ To be able to access an instance remotely, a floating IP address needs to be ass
      clicking the + button
 
   3. After the upper steps, you should test, if your floating IP are avaliable. By pinging the 
-     floating IP you can see the results.
+     floating IP you can see the results
+
+## Modifying the Security Groups
+
+Sometimes the floating IP can not ping correctly, because the security groups can not recognize some rules. So we have to add some specific rules firstly.
+
+  1. Go to ‘Access & Security’
+
+  2. Open the ‘Security Groups’ tab 
+
+  3. Choose the ‘default’ security groups and click on the Manage Rules button
+
+  4. Click on the + Add Rule button
+ 
+  5. Choose Rule as ‘All ICMP’, ‘All TCP’, ‘All UDP’ and click Add button
+
+  6. After the upper steps, you should test, if your floating IP are avaliable. By pinging the 
+     floating IP you can see the results
 
 ## Using the key with SSH
 
@@ -68,7 +85,7 @@ Now we've prepared a key, started an instance and associated a floating IP we ca
      ```
 
   3. If you have connected to a server with the same IP address before, you'll receive a message 
-     like the one below.
+     like the one below
      ```
      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
      @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
@@ -100,7 +117,7 @@ Now we've prepared a key, started an instance and associated a floating IP we ca
      Are you sure you want to continue connecting (yes/no)?
      ```
 
-  5. If everything works alright you’re now logged in.
+  5. If everything works alright you’re now logged in
 
 
 
