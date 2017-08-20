@@ -1,4 +1,4 @@
-# Bandwidth Performace Emulating
+# Bandwidth Performance Emulating
 
 Linux systems administrators and network administrators often find diagnosing network speed degradation complicated, as there are very few tools avaliable to diagnose these issues. Iperf is command-line tool used in the diagnostics of network speed issues.
 
