@@ -4,6 +4,8 @@ Linux systems administrators and network administrators often find diagnosing ne
 
 Iperf measures the maximum network throughput a server can handle. It is particularly useful when experiencing network speed issues, as you can use Iperf to determine which server is unable to reach maximum throughput.
 
+By the way, I can also verify the packet loss in UDP protocol by using Iperf.
+
 ## Installing Iperf
 
 > The installation section assumes that you are the root user. If you are not using the super user, you will need to use sudo before each command. Here I use Ubuntu or Debian OS.

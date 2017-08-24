@@ -1,3 +1,0 @@
-# TestCase
-
-For network performance we should simulate...
