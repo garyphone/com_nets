@@ -74,18 +74,19 @@ div.tooltip {
   background: lightsteelblue;
   border: 0px;
   border-radius: 8px;
-  /*pointer-events: none; //if we need a link, we should remove it*/ 
+  /*pointer-events: none; //if we need a link, we should remove it*/
 }
 
 </style>
 <body>
+<div id="body"></div>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script>
 
-var width = 960,
-    height = 570;
+var width = 1260,
+    height = 800;
 
 var projection = d3.geo.kavrayskiy7()
     .scale(170)
@@ -109,6 +110,8 @@ var svg = d3.select("body").append("svg")
         svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
       }))
     .append("g");
+
+$("svg").css({top: 100, left: 350, position:'absolute'});
 
 svg.append("defs").append("path")
     .datum({type: "Sphere"})
@@ -254,4 +257,3 @@ function lngLatToArc(d, sourceName, targetName, bend){
 </script>
 
 {% endblock %}
-

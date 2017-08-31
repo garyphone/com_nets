@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Visualization" %}{% endblock %}
+
+{% block main %}
+
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<style>
+
+#chart { border: 1px solid green;}
+svg { background: #AABBFF; border: 2px solid #8899EE;}
+
+</style>
+<body>
+<div id="chart"></div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+ var svg = d3.select("#chart").append("svg")
+        .attr("width", 200)
+        .attr("height", 200);
+    
+    // svg repositioning
+    $("svg").css({top: 200, left: 200, position:'absolute'});
+
+</script>
+
+{% endblock %}
