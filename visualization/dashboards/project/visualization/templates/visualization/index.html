@@ -60,7 +60,7 @@ body {
 
 .arcs{
 	fill:none;
-	stroke:orange;
+	stroke:red;
   stroke-width: 0.2px;
 }
 
@@ -85,7 +85,7 @@ div.tooltip {
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script>
 
-var width = 1260,
+var width = 1060,
     height = 800;
 
 var projection = d3.geo.kavrayskiy7()
@@ -111,7 +111,8 @@ var svg = d3.select("body").append("svg")
       }))
     .append("g");
 
-$("svg").css({top: 100, left: 350, position:'absolute'});
+//use this JQuery to move the interface in the middle of the page
+$("svg").css({top: 150, left: 350, position:'absolute'});
 
 svg.append("defs").append("path")
     .datum({type: "Sphere"})
@@ -201,11 +202,6 @@ d3.json("{% url 'horizon:project:network_topology:json' %}", function(data) {
               d.value.name +"</a>" + "<br/>" + d.value.status)
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 30) + "px");
-    })
-    .on("mouseout", function(d) {
-        div.transition()
-           .duration(1000)
-           .style("opacity", 0);
     });
 
     g1.selectAll(".routes")
