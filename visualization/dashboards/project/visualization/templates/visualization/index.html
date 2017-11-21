@@ -186,7 +186,7 @@ d3.json("{% url 'horizon:project:network_topology:json' %}", function(data) {
     .data(d3.entries(json1))
     .enter()
     .append("circle")
-    .attr("r",0.5)
+    .attr("r",1)
     .attr("transform",function(d) { return "translate("+ projection([
         d.value.lon,
         d.value.lat
@@ -195,13 +195,21 @@ d3.json("{% url 'horizon:project:network_topology:json' %}", function(data) {
     .attr("stroke","steelblue")
     .on("mouseover", function(d) {
         div.transition()
-           .duration(200)
-           .style("opacity", .9);
+            .duration(1000)
+            .style("opacity", 0.9);
         div .html(
             '<a href= "' + d.value.url + '">' + //with a link
               d.value.name +"</a>" + "<br/>" + d.value.status)
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 30) + "px");
+        })
+    .on("mouseout", function() {
+	div.transition()
+	    .duration(1000)
+	    .style("opacity", 0)
+	    .on('end', function() {
+		div.html('');
+	});
     });
 
     g1.selectAll(".routes")
