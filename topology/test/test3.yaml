@@ -1,4 +1,4 @@
-description: haec-box--cube-surface.xml
+description: haec-box--5x5.xml
 heat_template_version: '2015-04-30'
 resources:
   0port0:
@@ -16,122 +16,122 @@ resources:
   10port0:
     properties:
       fixed_ips:
+      - {ip_address: 10.13.0.16}
+      network: {get_resource: Node12}
+    type: OS::Neutron::Port
+  10port1:
+    properties:
+      fixed_ips:
+      - {ip_address: 10.14.0.15}
+      network: {get_resource: Node13}
+    type: OS::Neutron::Port
+  11port0:
+    properties:
+      fixed_ips:
       - {ip_address: 10.14.0.17}
       network: {get_resource: Node13}
     type: OS::Neutron::Port
-  10port1:
+  11port1:
     properties:
       fixed_ips:
       - {ip_address: 10.15.0.16}
       network: {get_resource: Node14}
     type: OS::Neutron::Port
-  11port0:
+  12port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.15.0.18}
-      network: {get_resource: Node14}
-    type: OS::Neutron::Port
-  11port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.16.0.17}
+      - {ip_address: 10.16.0.19}
       network: {get_resource: Node15}
     type: OS::Neutron::Port
-  12port0:
+  12port1:
+    properties:
+      fixed_ips:
+      - {ip_address: 10.17.0.18}
+      network: {get_resource: Node16}
+    type: OS::Neutron::Port
+  13port0:
     properties:
       fixed_ips:
       - {ip_address: 10.17.0.20}
       network: {get_resource: Node16}
     type: OS::Neutron::Port
-  12port1:
+  13port1:
     properties:
       fixed_ips:
       - {ip_address: 10.18.0.19}
       network: {get_resource: Node17}
     type: OS::Neutron::Port
-  13port0:
+  14port0:
     properties:
       fixed_ips:
       - {ip_address: 10.18.0.21}
       network: {get_resource: Node17}
     type: OS::Neutron::Port
-  13port1:
+  14port1:
     properties:
       fixed_ips:
       - {ip_address: 10.19.0.20}
       network: {get_resource: Node18}
     type: OS::Neutron::Port
-  14port0:
+  15port0:
     properties:
       fixed_ips:
       - {ip_address: 10.19.0.22}
       network: {get_resource: Node18}
     type: OS::Neutron::Port
-  14port1:
+  15port1:
     properties:
       fixed_ips:
       - {ip_address: 10.20.0.21}
       network: {get_resource: Node19}
     type: OS::Neutron::Port
-  15port0:
+  16port0:
     properties:
       fixed_ips:
       - {ip_address: 10.21.0.24}
       network: {get_resource: Node20}
     type: OS::Neutron::Port
-  15port1:
+  16port1:
     properties:
       fixed_ips:
       - {ip_address: 10.22.0.23}
       network: {get_resource: Node21}
     type: OS::Neutron::Port
-  16port0:
+  17port0:
     properties:
       fixed_ips:
       - {ip_address: 10.22.0.25}
       network: {get_resource: Node21}
     type: OS::Neutron::Port
-  16port1:
+  17port1:
     properties:
       fixed_ips:
       - {ip_address: 10.23.0.24}
       network: {get_resource: Node22}
     type: OS::Neutron::Port
-  17port0:
+  18port0:
     properties:
       fixed_ips:
       - {ip_address: 10.23.0.26}
       network: {get_resource: Node22}
     type: OS::Neutron::Port
-  17port1:
+  18port1:
     properties:
       fixed_ips:
       - {ip_address: 10.24.0.25}
       network: {get_resource: Node23}
     type: OS::Neutron::Port
-  18port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.25.0.28}
-      network: {get_resource: Node24}
-    type: OS::Neutron::Port
-  18port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.26.0.27}
-      network: {get_resource: Node25}
-    type: OS::Neutron::Port
   19port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.26.0.29}
-      network: {get_resource: Node25}
+      - {ip_address: 10.24.0.27}
+      network: {get_resource: Node23}
     type: OS::Neutron::Port
   19port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.27.0.28}
-      network: {get_resource: Node26}
+      - {ip_address: 10.25.0.26}
+      network: {get_resource: Node24}
     type: OS::Neutron::Port
   1port0:
     properties:
@@ -148,121 +148,121 @@ resources:
   20port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.27.0.30}
-      network: {get_resource: Node26}
+      - {ip_address: 10.1.0.8}
+      network: {get_resource: Node0}
     type: OS::Neutron::Port
   20port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.28.0.29}
-      network: {get_resource: Node27}
+      - {ip_address: 10.6.0.3}
+      network: {get_resource: Node5}
     type: OS::Neutron::Port
   21port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.1.0.7}
-      network: {get_resource: Node0}
+      - {ip_address: 10.2.0.9}
+      network: {get_resource: Node1}
     type: OS::Neutron::Port
   21port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.5.0.3}
-      network: {get_resource: Node4}
+      - {ip_address: 10.7.0.4}
+      network: {get_resource: Node6}
     type: OS::Neutron::Port
   22port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.5.0.11}
-      network: {get_resource: Node4}
+      - {ip_address: 10.3.0.10}
+      network: {get_resource: Node2}
     type: OS::Neutron::Port
   22port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.9.0.7}
-      network: {get_resource: Node8}
+      - {ip_address: 10.8.0.5}
+      network: {get_resource: Node7}
     type: OS::Neutron::Port
   23port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.9.0.15}
-      network: {get_resource: Node8}
+      - {ip_address: 10.4.0.11}
+      network: {get_resource: Node3}
     type: OS::Neutron::Port
   23port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.13.0.11}
-      network: {get_resource: Node12}
+      - {ip_address: 10.9.0.6}
+      network: {get_resource: Node8}
     type: OS::Neutron::Port
   24port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.2.0.8}
-      network: {get_resource: Node1}
+      - {ip_address: 10.5.0.12}
+      network: {get_resource: Node4}
     type: OS::Neutron::Port
   24port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.6.0.4}
-      network: {get_resource: Node5}
+      - {ip_address: 10.10.0.7}
+      network: {get_resource: Node9}
     type: OS::Neutron::Port
   25port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.6.0.12}
+      - {ip_address: 10.6.0.13}
       network: {get_resource: Node5}
     type: OS::Neutron::Port
   25port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.10.0.8}
-      network: {get_resource: Node9}
+      - {ip_address: 10.11.0.8}
+      network: {get_resource: Node10}
     type: OS::Neutron::Port
   26port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.10.0.16}
-      network: {get_resource: Node9}
+      - {ip_address: 10.7.0.14}
+      network: {get_resource: Node6}
     type: OS::Neutron::Port
   26port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.14.0.12}
-      network: {get_resource: Node13}
+      - {ip_address: 10.12.0.9}
+      network: {get_resource: Node11}
     type: OS::Neutron::Port
   27port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.3.0.9}
-      network: {get_resource: Node2}
+      - {ip_address: 10.8.0.15}
+      network: {get_resource: Node7}
     type: OS::Neutron::Port
   27port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.7.0.5}
-      network: {get_resource: Node6}
+      - {ip_address: 10.13.0.10}
+      network: {get_resource: Node12}
     type: OS::Neutron::Port
   28port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.7.0.13}
-      network: {get_resource: Node6}
+      - {ip_address: 10.9.0.16}
+      network: {get_resource: Node8}
     type: OS::Neutron::Port
   28port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.11.0.9}
-      network: {get_resource: Node10}
+      - {ip_address: 10.14.0.11}
+      network: {get_resource: Node13}
     type: OS::Neutron::Port
   29port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.11.0.17}
-      network: {get_resource: Node10}
+      - {ip_address: 10.10.0.17}
+      network: {get_resource: Node9}
     type: OS::Neutron::Port
   29port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.15.0.13}
+      - {ip_address: 10.15.0.12}
       network: {get_resource: Node14}
     type: OS::Neutron::Port
   2port0:
@@ -280,254 +280,134 @@ resources:
   30port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.4.0.10}
-      network: {get_resource: Node3}
+      - {ip_address: 10.11.0.18}
+      network: {get_resource: Node10}
     type: OS::Neutron::Port
   30port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.8.0.6}
-      network: {get_resource: Node7}
+      - {ip_address: 10.16.0.13}
+      network: {get_resource: Node15}
     type: OS::Neutron::Port
   31port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.8.0.14}
-      network: {get_resource: Node7}
+      - {ip_address: 10.12.0.19}
+      network: {get_resource: Node11}
     type: OS::Neutron::Port
   31port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.12.0.10}
-      network: {get_resource: Node11}
+      - {ip_address: 10.17.0.14}
+      network: {get_resource: Node16}
     type: OS::Neutron::Port
   32port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.12.0.18}
-      network: {get_resource: Node11}
+      - {ip_address: 10.13.0.20}
+      network: {get_resource: Node12}
     type: OS::Neutron::Port
   32port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.16.0.14}
-      network: {get_resource: Node15}
+      - {ip_address: 10.18.0.15}
+      network: {get_resource: Node17}
     type: OS::Neutron::Port
   33port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.13.0.19}
-      network: {get_resource: Node12}
+      - {ip_address: 10.14.0.21}
+      network: {get_resource: Node13}
     type: OS::Neutron::Port
   33port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.17.0.15}
-      network: {get_resource: Node16}
+      - {ip_address: 10.19.0.16}
+      network: {get_resource: Node18}
     type: OS::Neutron::Port
   34port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.17.0.23}
-      network: {get_resource: Node16}
+      - {ip_address: 10.15.0.22}
+      network: {get_resource: Node14}
     type: OS::Neutron::Port
   34port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.21.0.19}
-      network: {get_resource: Node20}
+      - {ip_address: 10.20.0.17}
+      network: {get_resource: Node19}
     type: OS::Neutron::Port
   35port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.21.0.27}
-      network: {get_resource: Node20}
+      - {ip_address: 10.16.0.23}
+      network: {get_resource: Node15}
     type: OS::Neutron::Port
   35port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.25.0.23}
-      network: {get_resource: Node24}
+      - {ip_address: 10.21.0.18}
+      network: {get_resource: Node20}
     type: OS::Neutron::Port
   36port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.14.0.20}
-      network: {get_resource: Node13}
+      - {ip_address: 10.17.0.24}
+      network: {get_resource: Node16}
     type: OS::Neutron::Port
   36port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.18.0.16}
-      network: {get_resource: Node17}
+      - {ip_address: 10.22.0.19}
+      network: {get_resource: Node21}
     type: OS::Neutron::Port
   37port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.18.0.24}
+      - {ip_address: 10.18.0.25}
       network: {get_resource: Node17}
     type: OS::Neutron::Port
   37port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.22.0.20}
-      network: {get_resource: Node21}
+      - {ip_address: 10.23.0.20}
+      network: {get_resource: Node22}
     type: OS::Neutron::Port
   38port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.22.0.28}
-      network: {get_resource: Node21}
+      - {ip_address: 10.19.0.26}
+      network: {get_resource: Node18}
     type: OS::Neutron::Port
   38port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.26.0.24}
-      network: {get_resource: Node25}
+      - {ip_address: 10.24.0.21}
+      network: {get_resource: Node23}
     type: OS::Neutron::Port
   39port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.15.0.21}
-      network: {get_resource: Node14}
+      - {ip_address: 10.20.0.27}
+      network: {get_resource: Node19}
     type: OS::Neutron::Port
   39port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.19.0.17}
-      network: {get_resource: Node18}
+      - {ip_address: 10.25.0.22}
+      network: {get_resource: Node24}
     type: OS::Neutron::Port
   3port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.5.0.8}
-      network: {get_resource: Node4}
+      - {ip_address: 10.4.0.7}
+      network: {get_resource: Node3}
     type: OS::Neutron::Port
   3port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.6.0.7}
-      network: {get_resource: Node5}
-    type: OS::Neutron::Port
-  40port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.19.0.25}
-      network: {get_resource: Node18}
-    type: OS::Neutron::Port
-  40port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.23.0.21}
-      network: {get_resource: Node22}
-    type: OS::Neutron::Port
-  41port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.23.0.29}
-      network: {get_resource: Node22}
-    type: OS::Neutron::Port
-  41port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.27.0.25}
-      network: {get_resource: Node26}
-    type: OS::Neutron::Port
-  42port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.16.0.22}
-      network: {get_resource: Node15}
-    type: OS::Neutron::Port
-  42port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.20.0.18}
-      network: {get_resource: Node19}
-    type: OS::Neutron::Port
-  43port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.20.0.26}
-      network: {get_resource: Node19}
-    type: OS::Neutron::Port
-  43port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.24.0.22}
-      network: {get_resource: Node23}
-    type: OS::Neutron::Port
-  44port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.24.0.30}
-      network: {get_resource: Node23}
-    type: OS::Neutron::Port
-  44port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.28.0.26}
-      network: {get_resource: Node27}
-    type: OS::Neutron::Port
-  45port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.1.0.31}
-      network: {get_resource: Node0}
-    type: OS::Neutron::Port
-  45port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.29.0.3}
-      network: {get_resource: Node28}
-    type: OS::Neutron::Port
-  46port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.29.0.34}
-      network: {get_resource: Node28}
-    type: OS::Neutron::Port
-  46port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.32.0.31}
-      network: {get_resource: Node31}
-    type: OS::Neutron::Port
-  47port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.32.0.37}
-      network: {get_resource: Node31}
-    type: OS::Neutron::Port
-  47port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.35.0.34}
-      network: {get_resource: Node34}
-    type: OS::Neutron::Port
-  48port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.5.0.32}
+      - {ip_address: 10.5.0.6}
       network: {get_resource: Node4}
-    type: OS::Neutron::Port
-  48port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.30.0.7}
-      network: {get_resource: Node29}
-    type: OS::Neutron::Port
-  49port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.30.0.35}
-      network: {get_resource: Node29}
-    type: OS::Neutron::Port
-  49port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.33.0.32}
-      network: {get_resource: Node32}
     type: OS::Neutron::Port
   4port0:
     properties:
@@ -541,126 +421,6 @@ resources:
       - {ip_address: 10.7.0.8}
       network: {get_resource: Node6}
     type: OS::Neutron::Port
-  50port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.33.0.38}
-      network: {get_resource: Node32}
-    type: OS::Neutron::Port
-  50port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.36.0.35}
-      network: {get_resource: Node35}
-    type: OS::Neutron::Port
-  51port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.9.0.33}
-      network: {get_resource: Node8}
-    type: OS::Neutron::Port
-  51port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.31.0.11}
-      network: {get_resource: Node30}
-    type: OS::Neutron::Port
-  52port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.31.0.36}
-      network: {get_resource: Node30}
-    type: OS::Neutron::Port
-  52port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.34.0.33}
-      network: {get_resource: Node33}
-    type: OS::Neutron::Port
-  53port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.34.0.39}
-      network: {get_resource: Node33}
-    type: OS::Neutron::Port
-  53port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.37.0.36}
-      network: {get_resource: Node36}
-    type: OS::Neutron::Port
-  54port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.29.0.32}
-      network: {get_resource: Node28}
-    type: OS::Neutron::Port
-  54port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.30.0.31}
-      network: {get_resource: Node29}
-    type: OS::Neutron::Port
-  55port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.30.0.33}
-      network: {get_resource: Node29}
-    type: OS::Neutron::Port
-  55port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.31.0.32}
-      network: {get_resource: Node30}
-    type: OS::Neutron::Port
-  56port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.31.0.19}
-      network: {get_resource: Node30}
-    type: OS::Neutron::Port
-  56port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.17.0.33}
-      network: {get_resource: Node16}
-    type: OS::Neutron::Port
-  57port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.32.0.35}
-      network: {get_resource: Node31}
-    type: OS::Neutron::Port
-  57port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.33.0.34}
-      network: {get_resource: Node32}
-    type: OS::Neutron::Port
-  58port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.33.0.36}
-      network: {get_resource: Node32}
-    type: OS::Neutron::Port
-  58port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.34.0.35}
-      network: {get_resource: Node33}
-    type: OS::Neutron::Port
-  59port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.34.0.23}
-      network: {get_resource: Node33}
-    type: OS::Neutron::Port
-  59port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.21.0.36}
-      network: {get_resource: Node20}
-    type: OS::Neutron::Port
   5port0:
     properties:
       fixed_ips:
@@ -673,65 +433,29 @@ resources:
       - {ip_address: 10.8.0.9}
       network: {get_resource: Node7}
     type: OS::Neutron::Port
-  60port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.35.0.38}
-      network: {get_resource: Node34}
-    type: OS::Neutron::Port
-  60port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.36.0.37}
-      network: {get_resource: Node35}
-    type: OS::Neutron::Port
-  61port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.36.0.39}
-      network: {get_resource: Node35}
-    type: OS::Neutron::Port
-  61port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.37.0.38}
-      network: {get_resource: Node36}
-    type: OS::Neutron::Port
-  62port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.37.0.27}
-      network: {get_resource: Node36}
-    type: OS::Neutron::Port
-  62port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.25.0.39}
-      network: {get_resource: Node24}
-    type: OS::Neutron::Port
   6port0:
+    properties:
+      fixed_ips:
+      - {ip_address: 10.8.0.11}
+      network: {get_resource: Node7}
+    type: OS::Neutron::Port
+  6port1:
+    properties:
+      fixed_ips:
+      - {ip_address: 10.9.0.10}
+      network: {get_resource: Node8}
+    type: OS::Neutron::Port
+  7port0:
     properties:
       fixed_ips:
       - {ip_address: 10.9.0.12}
       network: {get_resource: Node8}
     type: OS::Neutron::Port
-  6port1:
+  7port1:
     properties:
       fixed_ips:
       - {ip_address: 10.10.0.11}
       network: {get_resource: Node9}
-    type: OS::Neutron::Port
-  7port0:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.10.0.13}
-      network: {get_resource: Node9}
-    type: OS::Neutron::Port
-  7port1:
-    properties:
-      fixed_ips:
-      - {ip_address: 10.11.0.12}
-      network: {get_resource: Node10}
     type: OS::Neutron::Port
   8port0:
     properties:
@@ -748,22 +472,21 @@ resources:
   9port0:
     properties:
       fixed_ips:
-      - {ip_address: 10.13.0.16}
-      network: {get_resource: Node12}
+      - {ip_address: 10.12.0.15}
+      network: {get_resource: Node11}
     type: OS::Neutron::Port
   9port1:
     properties:
       fixed_ips:
-      - {ip_address: 10.14.0.15}
-      network: {get_resource: Node13}
+      - {ip_address: 10.13.0.14}
+      network: {get_resource: Node12}
     type: OS::Neutron::Port
   Ne0:
     properties:
       cidr: 10.1.0.0/24
       host_routes:
       - {destination: 10.2.0.0/24, nexthop: 10.1.0.4}
-      - {destination: 10.5.0.0/24, nexthop: 10.1.0.7}
-      - {destination: 10.29.0.0/24, nexthop: 10.1.0.31}
+      - {destination: 10.6.0.0/24, nexthop: 10.1.0.8}
       name: PCB-0
       network_id: {get_resource: Node0}
     type: OS::Neutron::Subnet
@@ -772,7 +495,7 @@ resources:
       cidr: 10.2.0.0/24
       host_routes:
       - {destination: 10.3.0.0/24, nexthop: 10.2.0.5}
-      - {destination: 10.6.0.0/24, nexthop: 10.2.0.8}
+      - {destination: 10.7.0.0/24, nexthop: 10.2.0.9}
       - {destination: 10.1.0.0/24, nexthop: 10.2.0.3}
       name: PCB-1
       network_id: {get_resource: Node1}
@@ -782,9 +505,8 @@ resources:
       cidr: 10.11.0.0/24
       host_routes:
       - {destination: 10.12.0.0/24, nexthop: 10.11.0.14}
-      - {destination: 10.15.0.0/24, nexthop: 10.11.0.17}
-      - {destination: 10.10.0.0/24, nexthop: 10.11.0.12}
-      - {destination: 10.7.0.0/24, nexthop: 10.11.0.9}
+      - {destination: 10.16.0.0/24, nexthop: 10.11.0.18}
+      - {destination: 10.6.0.0/24, nexthop: 10.11.0.8}
       name: PCB-10
       network_id: {get_resource: Node10}
     type: OS::Neutron::Subnet
@@ -792,9 +514,10 @@ resources:
     properties:
       cidr: 10.12.0.0/24
       host_routes:
-      - {destination: 10.16.0.0/24, nexthop: 10.12.0.18}
+      - {destination: 10.13.0.0/24, nexthop: 10.12.0.15}
+      - {destination: 10.17.0.0/24, nexthop: 10.12.0.19}
       - {destination: 10.11.0.0/24, nexthop: 10.12.0.13}
-      - {destination: 10.8.0.0/24, nexthop: 10.12.0.10}
+      - {destination: 10.7.0.0/24, nexthop: 10.12.0.9}
       name: PCB-11
       network_id: {get_resource: Node11}
     type: OS::Neutron::Subnet
@@ -803,8 +526,9 @@ resources:
       cidr: 10.13.0.0/24
       host_routes:
       - {destination: 10.14.0.0/24, nexthop: 10.13.0.16}
-      - {destination: 10.17.0.0/24, nexthop: 10.13.0.19}
-      - {destination: 10.9.0.0/24, nexthop: 10.13.0.11}
+      - {destination: 10.18.0.0/24, nexthop: 10.13.0.20}
+      - {destination: 10.12.0.0/24, nexthop: 10.13.0.14}
+      - {destination: 10.8.0.0/24, nexthop: 10.13.0.10}
       name: PCB-12
       network_id: {get_resource: Node12}
     type: OS::Neutron::Subnet
@@ -813,9 +537,9 @@ resources:
       cidr: 10.14.0.0/24
       host_routes:
       - {destination: 10.15.0.0/24, nexthop: 10.14.0.17}
-      - {destination: 10.18.0.0/24, nexthop: 10.14.0.20}
+      - {destination: 10.19.0.0/24, nexthop: 10.14.0.21}
       - {destination: 10.13.0.0/24, nexthop: 10.14.0.15}
-      - {destination: 10.10.0.0/24, nexthop: 10.14.0.12}
+      - {destination: 10.9.0.0/24, nexthop: 10.14.0.11}
       name: PCB-13
       network_id: {get_resource: Node13}
     type: OS::Neutron::Subnet
@@ -823,10 +547,9 @@ resources:
     properties:
       cidr: 10.15.0.0/24
       host_routes:
-      - {destination: 10.16.0.0/24, nexthop: 10.15.0.18}
-      - {destination: 10.19.0.0/24, nexthop: 10.15.0.21}
+      - {destination: 10.20.0.0/24, nexthop: 10.15.0.22}
       - {destination: 10.14.0.0/24, nexthop: 10.15.0.16}
-      - {destination: 10.11.0.0/24, nexthop: 10.15.0.13}
+      - {destination: 10.10.0.0/24, nexthop: 10.15.0.12}
       name: PCB-14
       network_id: {get_resource: Node14}
     type: OS::Neutron::Subnet
@@ -834,9 +557,9 @@ resources:
     properties:
       cidr: 10.16.0.0/24
       host_routes:
-      - {destination: 10.20.0.0/24, nexthop: 10.16.0.22}
-      - {destination: 10.15.0.0/24, nexthop: 10.16.0.17}
-      - {destination: 10.12.0.0/24, nexthop: 10.16.0.14}
+      - {destination: 10.17.0.0/24, nexthop: 10.16.0.19}
+      - {destination: 10.21.0.0/24, nexthop: 10.16.0.23}
+      - {destination: 10.11.0.0/24, nexthop: 10.16.0.13}
       name: PCB-15
       network_id: {get_resource: Node15}
     type: OS::Neutron::Subnet
@@ -845,9 +568,9 @@ resources:
       cidr: 10.17.0.0/24
       host_routes:
       - {destination: 10.18.0.0/24, nexthop: 10.17.0.20}
-      - {destination: 10.21.0.0/24, nexthop: 10.17.0.23}
-      - {destination: 10.13.0.0/24, nexthop: 10.17.0.15}
-      - {destination: 10.31.0.0/24, nexthop: 10.17.0.33}
+      - {destination: 10.22.0.0/24, nexthop: 10.17.0.24}
+      - {destination: 10.16.0.0/24, nexthop: 10.17.0.18}
+      - {destination: 10.12.0.0/24, nexthop: 10.17.0.14}
       name: PCB-16
       network_id: {get_resource: Node16}
     type: OS::Neutron::Subnet
@@ -856,9 +579,9 @@ resources:
       cidr: 10.18.0.0/24
       host_routes:
       - {destination: 10.19.0.0/24, nexthop: 10.18.0.21}
-      - {destination: 10.22.0.0/24, nexthop: 10.18.0.24}
+      - {destination: 10.23.0.0/24, nexthop: 10.18.0.25}
       - {destination: 10.17.0.0/24, nexthop: 10.18.0.19}
-      - {destination: 10.14.0.0/24, nexthop: 10.18.0.16}
+      - {destination: 10.13.0.0/24, nexthop: 10.18.0.15}
       name: PCB-17
       network_id: {get_resource: Node17}
     type: OS::Neutron::Subnet
@@ -867,9 +590,9 @@ resources:
       cidr: 10.19.0.0/24
       host_routes:
       - {destination: 10.20.0.0/24, nexthop: 10.19.0.22}
-      - {destination: 10.23.0.0/24, nexthop: 10.19.0.25}
+      - {destination: 10.24.0.0/24, nexthop: 10.19.0.26}
       - {destination: 10.18.0.0/24, nexthop: 10.19.0.20}
-      - {destination: 10.15.0.0/24, nexthop: 10.19.0.17}
+      - {destination: 10.14.0.0/24, nexthop: 10.19.0.16}
       name: PCB-18
       network_id: {get_resource: Node18}
     type: OS::Neutron::Subnet
@@ -877,9 +600,9 @@ resources:
     properties:
       cidr: 10.20.0.0/24
       host_routes:
-      - {destination: 10.24.0.0/24, nexthop: 10.20.0.26}
+      - {destination: 10.25.0.0/24, nexthop: 10.20.0.27}
       - {destination: 10.19.0.0/24, nexthop: 10.20.0.21}
-      - {destination: 10.16.0.0/24, nexthop: 10.20.0.18}
+      - {destination: 10.15.0.0/24, nexthop: 10.20.0.17}
       name: PCB-19
       network_id: {get_resource: Node19}
     type: OS::Neutron::Subnet
@@ -888,7 +611,7 @@ resources:
       cidr: 10.3.0.0/24
       host_routes:
       - {destination: 10.4.0.0/24, nexthop: 10.3.0.6}
-      - {destination: 10.7.0.0/24, nexthop: 10.3.0.9}
+      - {destination: 10.8.0.0/24, nexthop: 10.3.0.10}
       - {destination: 10.2.0.0/24, nexthop: 10.3.0.4}
       name: PCB-2
       network_id: {get_resource: Node2}
@@ -898,9 +621,7 @@ resources:
       cidr: 10.21.0.0/24
       host_routes:
       - {destination: 10.22.0.0/24, nexthop: 10.21.0.24}
-      - {destination: 10.25.0.0/24, nexthop: 10.21.0.27}
-      - {destination: 10.17.0.0/24, nexthop: 10.21.0.19}
-      - {destination: 10.34.0.0/24, nexthop: 10.21.0.36}
+      - {destination: 10.16.0.0/24, nexthop: 10.21.0.18}
       name: PCB-20
       network_id: {get_resource: Node20}
     type: OS::Neutron::Subnet
@@ -909,9 +630,8 @@ resources:
       cidr: 10.22.0.0/24
       host_routes:
       - {destination: 10.23.0.0/24, nexthop: 10.22.0.25}
-      - {destination: 10.26.0.0/24, nexthop: 10.22.0.28}
       - {destination: 10.21.0.0/24, nexthop: 10.22.0.23}
-      - {destination: 10.18.0.0/24, nexthop: 10.22.0.20}
+      - {destination: 10.17.0.0/24, nexthop: 10.22.0.19}
       name: PCB-21
       network_id: {get_resource: Node21}
     type: OS::Neutron::Subnet
@@ -920,9 +640,8 @@ resources:
       cidr: 10.23.0.0/24
       host_routes:
       - {destination: 10.24.0.0/24, nexthop: 10.23.0.26}
-      - {destination: 10.27.0.0/24, nexthop: 10.23.0.29}
       - {destination: 10.22.0.0/24, nexthop: 10.23.0.24}
-      - {destination: 10.19.0.0/24, nexthop: 10.23.0.21}
+      - {destination: 10.18.0.0/24, nexthop: 10.23.0.20}
       name: PCB-22
       network_id: {get_resource: Node22}
     type: OS::Neutron::Subnet
@@ -930,9 +649,9 @@ resources:
     properties:
       cidr: 10.24.0.0/24
       host_routes:
-      - {destination: 10.28.0.0/24, nexthop: 10.24.0.30}
+      - {destination: 10.25.0.0/24, nexthop: 10.24.0.27}
       - {destination: 10.23.0.0/24, nexthop: 10.24.0.25}
-      - {destination: 10.20.0.0/24, nexthop: 10.24.0.22}
+      - {destination: 10.19.0.0/24, nexthop: 10.24.0.21}
       name: PCB-23
       network_id: {get_resource: Node23}
     type: OS::Neutron::Subnet
@@ -940,151 +659,27 @@ resources:
     properties:
       cidr: 10.25.0.0/24
       host_routes:
-      - {destination: 10.26.0.0/24, nexthop: 10.25.0.28}
-      - {destination: 10.21.0.0/24, nexthop: 10.25.0.23}
-      - {destination: 10.37.0.0/24, nexthop: 10.25.0.39}
+      - {destination: 10.24.0.0/24, nexthop: 10.25.0.26}
+      - {destination: 10.20.0.0/24, nexthop: 10.25.0.22}
       name: PCB-24
       network_id: {get_resource: Node24}
-    type: OS::Neutron::Subnet
-  Ne25:
-    properties:
-      cidr: 10.26.0.0/24
-      host_routes:
-      - {destination: 10.27.0.0/24, nexthop: 10.26.0.29}
-      - {destination: 10.25.0.0/24, nexthop: 10.26.0.27}
-      - {destination: 10.22.0.0/24, nexthop: 10.26.0.24}
-      name: PCB-25
-      network_id: {get_resource: Node25}
-    type: OS::Neutron::Subnet
-  Ne26:
-    properties:
-      cidr: 10.27.0.0/24
-      host_routes:
-      - {destination: 10.28.0.0/24, nexthop: 10.27.0.30}
-      - {destination: 10.26.0.0/24, nexthop: 10.27.0.28}
-      - {destination: 10.23.0.0/24, nexthop: 10.27.0.25}
-      name: PCB-26
-      network_id: {get_resource: Node26}
-    type: OS::Neutron::Subnet
-  Ne27:
-    properties:
-      cidr: 10.28.0.0/24
-      host_routes:
-      - {destination: 10.27.0.0/24, nexthop: 10.28.0.29}
-      - {destination: 10.24.0.0/24, nexthop: 10.28.0.26}
-      name: PCB-26
-      network_id: {get_resource: Node27}
-    type: OS::Neutron::Subnet
-  Ne28:
-    properties:
-      cidr: 10.29.0.0/24
-      host_routes:
-      - {destination: 10.32.0.0/24, nexthop: 10.29.0.34}
-      - {destination: 10.30.0.0/24, nexthop: 10.29.0.32}
-      - {destination: 10.1.0.0/24, nexthop: 10.29.0.3}
-      name: PCB-28
-      network_id: {get_resource: Node28}
-    type: OS::Neutron::Subnet
-  Ne29:
-    properties:
-      cidr: 10.30.0.0/24
-      host_routes:
-      - {destination: 10.33.0.0/24, nexthop: 10.30.0.35}
-      - {destination: 10.31.0.0/24, nexthop: 10.30.0.33}
-      - {destination: 10.5.0.0/24, nexthop: 10.30.0.7}
-      - {destination: 10.29.0.0/24, nexthop: 10.30.0.31}
-      name: PCB-29
-      network_id: {get_resource: Node29}
     type: OS::Neutron::Subnet
   Ne3:
     properties:
       cidr: 10.4.0.0/24
       host_routes:
-      - {destination: 10.8.0.0/24, nexthop: 10.4.0.10}
+      - {destination: 10.5.0.0/24, nexthop: 10.4.0.7}
+      - {destination: 10.9.0.0/24, nexthop: 10.4.0.11}
       - {destination: 10.3.0.0/24, nexthop: 10.4.0.5}
       name: PCB-3
       network_id: {get_resource: Node3}
-    type: OS::Neutron::Subnet
-  Ne30:
-    properties:
-      cidr: 10.31.0.0/24
-      host_routes:
-      - {destination: 10.34.0.0/24, nexthop: 10.31.0.36}
-      - {destination: 10.17.0.0/24, nexthop: 10.31.0.19}
-      - {destination: 10.9.0.0/24, nexthop: 10.31.0.11}
-      - {destination: 10.30.0.0/24, nexthop: 10.31.0.32}
-      name: PCB-30
-      network_id: {get_resource: Node30}
-    type: OS::Neutron::Subnet
-  Ne31:
-    properties:
-      cidr: 10.32.0.0/24
-      host_routes:
-      - {destination: 10.35.0.0/24, nexthop: 10.32.0.37}
-      - {destination: 10.33.0.0/24, nexthop: 10.32.0.35}
-      - {destination: 10.29.0.0/24, nexthop: 10.32.0.31}
-      name: PCB-31
-      network_id: {get_resource: Node31}
-    type: OS::Neutron::Subnet
-  Ne32:
-    properties:
-      cidr: 10.33.0.0/24
-      host_routes:
-      - {destination: 10.36.0.0/24, nexthop: 10.33.0.38}
-      - {destination: 10.34.0.0/24, nexthop: 10.33.0.36}
-      - {destination: 10.30.0.0/24, nexthop: 10.33.0.32}
-      - {destination: 10.32.0.0/24, nexthop: 10.33.0.34}
-      name: PCB-32
-      network_id: {get_resource: Node32}
-    type: OS::Neutron::Subnet
-  Ne33:
-    properties:
-      cidr: 10.34.0.0/24
-      host_routes:
-      - {destination: 10.37.0.0/24, nexthop: 10.34.0.39}
-      - {destination: 10.21.0.0/24, nexthop: 10.34.0.23}
-      - {destination: 10.31.0.0/24, nexthop: 10.34.0.33}
-      - {destination: 10.33.0.0/24, nexthop: 10.34.0.35}
-      name: PCB-33
-      network_id: {get_resource: Node33}
-    type: OS::Neutron::Subnet
-  Ne34:
-    properties:
-      cidr: 10.35.0.0/24
-      host_routes:
-      - {destination: 10.36.0.0/24, nexthop: 10.35.0.38}
-      - {destination: 10.32.0.0/24, nexthop: 10.35.0.34}
-      name: PCB-34
-      network_id: {get_resource: Node34}
-    type: OS::Neutron::Subnet
-  Ne35:
-    properties:
-      cidr: 10.36.0.0/24
-      host_routes:
-      - {destination: 10.37.0.0/24, nexthop: 10.36.0.39}
-      - {destination: 10.33.0.0/24, nexthop: 10.36.0.35}
-      - {destination: 10.35.0.0/24, nexthop: 10.36.0.37}
-      name: PCB-35
-      network_id: {get_resource: Node35}
-    type: OS::Neutron::Subnet
-  Ne36:
-    properties:
-      cidr: 10.37.0.0/24
-      host_routes:
-      - {destination: 10.25.0.0/24, nexthop: 10.37.0.27}
-      - {destination: 10.34.0.0/24, nexthop: 10.37.0.36}
-      - {destination: 10.36.0.0/24, nexthop: 10.37.0.38}
-      name: PCB-36
-      network_id: {get_resource: Node36}
     type: OS::Neutron::Subnet
   Ne4:
     properties:
       cidr: 10.5.0.0/24
       host_routes:
-      - {destination: 10.6.0.0/24, nexthop: 10.5.0.8}
-      - {destination: 10.9.0.0/24, nexthop: 10.5.0.11}
-      - {destination: 10.30.0.0/24, nexthop: 10.5.0.32}
-      - {destination: 10.1.0.0/24, nexthop: 10.5.0.3}
+      - {destination: 10.10.0.0/24, nexthop: 10.5.0.12}
+      - {destination: 10.4.0.0/24, nexthop: 10.5.0.6}
       name: PCB-4
       network_id: {get_resource: Node4}
     type: OS::Neutron::Subnet
@@ -1093,9 +688,8 @@ resources:
       cidr: 10.6.0.0/24
       host_routes:
       - {destination: 10.7.0.0/24, nexthop: 10.6.0.9}
-      - {destination: 10.10.0.0/24, nexthop: 10.6.0.12}
-      - {destination: 10.5.0.0/24, nexthop: 10.6.0.7}
-      - {destination: 10.2.0.0/24, nexthop: 10.6.0.4}
+      - {destination: 10.11.0.0/24, nexthop: 10.6.0.13}
+      - {destination: 10.1.0.0/24, nexthop: 10.6.0.3}
       name: PCB-5
       network_id: {get_resource: Node5}
     type: OS::Neutron::Subnet
@@ -1104,9 +698,9 @@ resources:
       cidr: 10.7.0.0/24
       host_routes:
       - {destination: 10.8.0.0/24, nexthop: 10.7.0.10}
-      - {destination: 10.11.0.0/24, nexthop: 10.7.0.13}
+      - {destination: 10.12.0.0/24, nexthop: 10.7.0.14}
       - {destination: 10.6.0.0/24, nexthop: 10.7.0.8}
-      - {destination: 10.3.0.0/24, nexthop: 10.7.0.5}
+      - {destination: 10.2.0.0/24, nexthop: 10.7.0.4}
       name: PCB-6
       network_id: {get_resource: Node6}
     type: OS::Neutron::Subnet
@@ -1114,9 +708,10 @@ resources:
     properties:
       cidr: 10.8.0.0/24
       host_routes:
-      - {destination: 10.12.0.0/24, nexthop: 10.8.0.14}
+      - {destination: 10.9.0.0/24, nexthop: 10.8.0.11}
+      - {destination: 10.13.0.0/24, nexthop: 10.8.0.15}
       - {destination: 10.7.0.0/24, nexthop: 10.8.0.9}
-      - {destination: 10.4.0.0/24, nexthop: 10.8.0.6}
+      - {destination: 10.3.0.0/24, nexthop: 10.8.0.5}
       name: PCB-7
       network_id: {get_resource: Node7}
     type: OS::Neutron::Subnet
@@ -1125,9 +720,9 @@ resources:
       cidr: 10.9.0.0/24
       host_routes:
       - {destination: 10.10.0.0/24, nexthop: 10.9.0.12}
-      - {destination: 10.13.0.0/24, nexthop: 10.9.0.15}
-      - {destination: 10.31.0.0/24, nexthop: 10.9.0.33}
-      - {destination: 10.5.0.0/24, nexthop: 10.9.0.7}
+      - {destination: 10.14.0.0/24, nexthop: 10.9.0.16}
+      - {destination: 10.8.0.0/24, nexthop: 10.9.0.10}
+      - {destination: 10.4.0.0/24, nexthop: 10.9.0.6}
       name: PCB-8
       network_id: {get_resource: Node8}
     type: OS::Neutron::Subnet
@@ -1135,10 +730,9 @@ resources:
     properties:
       cidr: 10.10.0.0/24
       host_routes:
-      - {destination: 10.11.0.0/24, nexthop: 10.10.0.13}
-      - {destination: 10.14.0.0/24, nexthop: 10.10.0.16}
+      - {destination: 10.15.0.0/24, nexthop: 10.10.0.17}
       - {destination: 10.9.0.0/24, nexthop: 10.10.0.11}
-      - {destination: 10.6.0.0/24, nexthop: 10.10.0.8}
+      - {destination: 10.5.0.0/24, nexthop: 10.10.0.7}
       name: PCB-9
       network_id: {get_resource: Node9}
     type: OS::Neutron::Subnet
@@ -1196,44 +790,8 @@ resources:
   Node24:
     properties: {name: PCB-24}
     type: OS::Neutron::Net
-  Node25:
-    properties: {name: PCB-25}
-    type: OS::Neutron::Net
-  Node26:
-    properties: {name: PCB-26}
-    type: OS::Neutron::Net
-  Node27:
-    properties: {name: PCB-26}
-    type: OS::Neutron::Net
-  Node28:
-    properties: {name: PCB-28}
-    type: OS::Neutron::Net
-  Node29:
-    properties: {name: PCB-29}
-    type: OS::Neutron::Net
   Node3:
     properties: {name: PCB-3}
-    type: OS::Neutron::Net
-  Node30:
-    properties: {name: PCB-30}
-    type: OS::Neutron::Net
-  Node31:
-    properties: {name: PCB-31}
-    type: OS::Neutron::Net
-  Node32:
-    properties: {name: PCB-32}
-    type: OS::Neutron::Net
-  Node33:
-    properties: {name: PCB-33}
-    type: OS::Neutron::Net
-  Node34:
-    properties: {name: PCB-34}
-    type: OS::Neutron::Net
-  Node35:
-    properties: {name: PCB-35}
-    type: OS::Neutron::Net
-  Node36:
-    properties: {name: PCB-36}
     type: OS::Neutron::Net
   Node4:
     properties: {name: PCB-4}
@@ -1358,80 +916,11 @@ resources:
   ir4:
     properties: {name: ir4}
     type: OS::Neutron::Router
-  ir40:
-    properties: {name: ir40}
-    type: OS::Neutron::Router
-  ir41:
-    properties: {name: ir41}
-    type: OS::Neutron::Router
-  ir42:
-    properties: {name: ir42}
-    type: OS::Neutron::Router
-  ir43:
-    properties: {name: ir43}
-    type: OS::Neutron::Router
-  ir44:
-    properties: {name: ir44}
-    type: OS::Neutron::Router
-  ir45:
-    properties: {name: ir45}
-    type: OS::Neutron::Router
-  ir46:
-    properties: {name: ir46}
-    type: OS::Neutron::Router
-  ir47:
-    properties: {name: ir47}
-    type: OS::Neutron::Router
-  ir48:
-    properties: {name: ir48}
-    type: OS::Neutron::Router
-  ir49:
-    properties: {name: ir49}
-    type: OS::Neutron::Router
   ir5:
     properties: {name: ir5}
     type: OS::Neutron::Router
-  ir50:
-    properties: {name: ir50}
-    type: OS::Neutron::Router
-  ir51:
-    properties: {name: ir51}
-    type: OS::Neutron::Router
-  ir52:
-    properties: {name: ir52}
-    type: OS::Neutron::Router
-  ir53:
-    properties: {name: ir53}
-    type: OS::Neutron::Router
-  ir54:
-    properties: {name: ir54}
-    type: OS::Neutron::Router
-  ir55:
-    properties: {name: ir55}
-    type: OS::Neutron::Router
-  ir56:
-    properties: {name: ir56}
-    type: OS::Neutron::Router
-  ir57:
-    properties: {name: ir57}
-    type: OS::Neutron::Router
-  ir58:
-    properties: {name: ir58}
-    type: OS::Neutron::Router
-  ir59:
-    properties: {name: ir59}
-    type: OS::Neutron::Router
   ir6:
     properties: {name: ir6}
-    type: OS::Neutron::Router
-  ir60:
-    properties: {name: ir60}
-    type: OS::Neutron::Router
-  ir61:
-    properties: {name: ir61}
-    type: OS::Neutron::Router
-  ir62:
-    properties: {name: ir62}
     type: OS::Neutron::Router
   ir7:
     properties: {name: ir7}
@@ -1617,130 +1106,15 @@ resources:
       port: {get_resource: 4port0}
       router_id: {get_resource: ir4}
     type: OS::Neutron::RouterInterface
-  iriA40:
-    properties:
-      port: {get_resource: 40port0}
-      router_id: {get_resource: ir40}
-    type: OS::Neutron::RouterInterface
-  iriA41:
-    properties:
-      port: {get_resource: 41port0}
-      router_id: {get_resource: ir41}
-    type: OS::Neutron::RouterInterface
-  iriA42:
-    properties:
-      port: {get_resource: 42port0}
-      router_id: {get_resource: ir42}
-    type: OS::Neutron::RouterInterface
-  iriA43:
-    properties:
-      port: {get_resource: 43port0}
-      router_id: {get_resource: ir43}
-    type: OS::Neutron::RouterInterface
-  iriA44:
-    properties:
-      port: {get_resource: 44port0}
-      router_id: {get_resource: ir44}
-    type: OS::Neutron::RouterInterface
-  iriA45:
-    properties:
-      port: {get_resource: 45port0}
-      router_id: {get_resource: ir45}
-    type: OS::Neutron::RouterInterface
-  iriA46:
-    properties:
-      port: {get_resource: 46port0}
-      router_id: {get_resource: ir46}
-    type: OS::Neutron::RouterInterface
-  iriA47:
-    properties:
-      port: {get_resource: 47port0}
-      router_id: {get_resource: ir47}
-    type: OS::Neutron::RouterInterface
-  iriA48:
-    properties:
-      port: {get_resource: 48port0}
-      router_id: {get_resource: ir48}
-    type: OS::Neutron::RouterInterface
-  iriA49:
-    properties:
-      port: {get_resource: 49port0}
-      router_id: {get_resource: ir49}
-    type: OS::Neutron::RouterInterface
   iriA5:
     properties:
       port: {get_resource: 5port0}
       router_id: {get_resource: ir5}
     type: OS::Neutron::RouterInterface
-  iriA50:
-    properties:
-      port: {get_resource: 50port0}
-      router_id: {get_resource: ir50}
-    type: OS::Neutron::RouterInterface
-  iriA51:
-    properties:
-      port: {get_resource: 51port0}
-      router_id: {get_resource: ir51}
-    type: OS::Neutron::RouterInterface
-  iriA52:
-    properties:
-      port: {get_resource: 52port0}
-      router_id: {get_resource: ir52}
-    type: OS::Neutron::RouterInterface
-  iriA53:
-    properties:
-      port: {get_resource: 53port0}
-      router_id: {get_resource: ir53}
-    type: OS::Neutron::RouterInterface
-  iriA54:
-    properties:
-      port: {get_resource: 54port0}
-      router_id: {get_resource: ir54}
-    type: OS::Neutron::RouterInterface
-  iriA55:
-    properties:
-      port: {get_resource: 55port0}
-      router_id: {get_resource: ir55}
-    type: OS::Neutron::RouterInterface
-  iriA56:
-    properties:
-      port: {get_resource: 56port0}
-      router_id: {get_resource: ir56}
-    type: OS::Neutron::RouterInterface
-  iriA57:
-    properties:
-      port: {get_resource: 57port0}
-      router_id: {get_resource: ir57}
-    type: OS::Neutron::RouterInterface
-  iriA58:
-    properties:
-      port: {get_resource: 58port0}
-      router_id: {get_resource: ir58}
-    type: OS::Neutron::RouterInterface
-  iriA59:
-    properties:
-      port: {get_resource: 59port0}
-      router_id: {get_resource: ir59}
-    type: OS::Neutron::RouterInterface
   iriA6:
     properties:
       port: {get_resource: 6port0}
       router_id: {get_resource: ir6}
-    type: OS::Neutron::RouterInterface
-  iriA60:
-    properties:
-      port: {get_resource: 60port0}
-      router_id: {get_resource: ir60}
-    type: OS::Neutron::RouterInterface
-  iriA61:
-    properties:
-      port: {get_resource: 61port0}
-      router_id: {get_resource: ir61}
-    type: OS::Neutron::RouterInterface
-  iriA62:
-    properties:
-      port: {get_resource: 62port0}
-      router_id: {get_resource: ir62}
     type: OS::Neutron::RouterInterface
   iriA7:
     properties:
@@ -1932,130 +1306,15 @@ resources:
       port: {get_resource: 4port1}
       router_id: {get_resource: ir4}
     type: OS::Neutron::RouterInterface
-  iriB40:
-    properties:
-      port: {get_resource: 40port1}
-      router_id: {get_resource: ir40}
-    type: OS::Neutron::RouterInterface
-  iriB41:
-    properties:
-      port: {get_resource: 41port1}
-      router_id: {get_resource: ir41}
-    type: OS::Neutron::RouterInterface
-  iriB42:
-    properties:
-      port: {get_resource: 42port1}
-      router_id: {get_resource: ir42}
-    type: OS::Neutron::RouterInterface
-  iriB43:
-    properties:
-      port: {get_resource: 43port1}
-      router_id: {get_resource: ir43}
-    type: OS::Neutron::RouterInterface
-  iriB44:
-    properties:
-      port: {get_resource: 44port1}
-      router_id: {get_resource: ir44}
-    type: OS::Neutron::RouterInterface
-  iriB45:
-    properties:
-      port: {get_resource: 45port1}
-      router_id: {get_resource: ir45}
-    type: OS::Neutron::RouterInterface
-  iriB46:
-    properties:
-      port: {get_resource: 46port1}
-      router_id: {get_resource: ir46}
-    type: OS::Neutron::RouterInterface
-  iriB47:
-    properties:
-      port: {get_resource: 47port1}
-      router_id: {get_resource: ir47}
-    type: OS::Neutron::RouterInterface
-  iriB48:
-    properties:
-      port: {get_resource: 48port1}
-      router_id: {get_resource: ir48}
-    type: OS::Neutron::RouterInterface
-  iriB49:
-    properties:
-      port: {get_resource: 49port1}
-      router_id: {get_resource: ir49}
-    type: OS::Neutron::RouterInterface
   iriB5:
     properties:
       port: {get_resource: 5port1}
       router_id: {get_resource: ir5}
     type: OS::Neutron::RouterInterface
-  iriB50:
-    properties:
-      port: {get_resource: 50port1}
-      router_id: {get_resource: ir50}
-    type: OS::Neutron::RouterInterface
-  iriB51:
-    properties:
-      port: {get_resource: 51port1}
-      router_id: {get_resource: ir51}
-    type: OS::Neutron::RouterInterface
-  iriB52:
-    properties:
-      port: {get_resource: 52port1}
-      router_id: {get_resource: ir52}
-    type: OS::Neutron::RouterInterface
-  iriB53:
-    properties:
-      port: {get_resource: 53port1}
-      router_id: {get_resource: ir53}
-    type: OS::Neutron::RouterInterface
-  iriB54:
-    properties:
-      port: {get_resource: 54port1}
-      router_id: {get_resource: ir54}
-    type: OS::Neutron::RouterInterface
-  iriB55:
-    properties:
-      port: {get_resource: 55port1}
-      router_id: {get_resource: ir55}
-    type: OS::Neutron::RouterInterface
-  iriB56:
-    properties:
-      port: {get_resource: 56port1}
-      router_id: {get_resource: ir56}
-    type: OS::Neutron::RouterInterface
-  iriB57:
-    properties:
-      port: {get_resource: 57port1}
-      router_id: {get_resource: ir57}
-    type: OS::Neutron::RouterInterface
-  iriB58:
-    properties:
-      port: {get_resource: 58port1}
-      router_id: {get_resource: ir58}
-    type: OS::Neutron::RouterInterface
-  iriB59:
-    properties:
-      port: {get_resource: 59port1}
-      router_id: {get_resource: ir59}
-    type: OS::Neutron::RouterInterface
   iriB6:
     properties:
       port: {get_resource: 6port1}
       router_id: {get_resource: ir6}
-    type: OS::Neutron::RouterInterface
-  iriB60:
-    properties:
-      port: {get_resource: 60port1}
-      router_id: {get_resource: ir60}
-    type: OS::Neutron::RouterInterface
-  iriB61:
-    properties:
-      port: {get_resource: 61port1}
-      router_id: {get_resource: ir61}
-    type: OS::Neutron::RouterInterface
-  iriB62:
-    properties:
-      port: {get_resource: 62port1}
-      router_id: {get_resource: ir62}
     type: OS::Neutron::RouterInterface
   iriB7:
     properties:
