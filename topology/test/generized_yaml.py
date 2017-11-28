@@ -7,7 +7,7 @@ from xml.dom import minidom
 
 #filename = input('please print the filename you want to convert:) ')
 
-filename = 'arpanet1970.xml'
+filename = 'haec-box--cube-surface.xml'
 
 xmldoc = minidom.parse(filename)
 
@@ -115,47 +115,40 @@ files = {}
 data = {}
 k = len(Nes)
 
-print targets, sources
-
 for i in range(len(Nodes)):
     data[Nodes[i]] = {'type' : 'OS::Neutron::Net'}
     data[Nodes[i]]['properties'] = {'name' : Names[i]}
 
-def all_indices(value, qlist):
-    indices = []
-    idx = -1
-    while True:
+def setHostRoutes(value):
+    def all_indices(key, qlist):
+      indices = []
+      idx = -1
+      while True:
         try:
-            idx = qlist.index(value, idx+1)
+            idx = qlist.index(key, idx+1)
             indices.append(idx)
         except ValueError:
             break
-    return indices
+      return indices
 
-alpha = all_indices("0", sources)
-belta = all_indices("0", targets)
+    alpha = all_indices(str(value), sources)
+    belta = all_indices(str(value), targets)
 
-print alpha, belta
+    ipAs = []
+    ipBs = []
+    
+    for i in range(len(alpha)):
+       ipA = ('10.' + str(int(targets[alpha[i]]) + 1) + '.0.0/24')
+       ipB = ('10.' + str(int(value) + 1) + '.0.' + str(int(targets[alpha[i]]) + 3))
+       routes = {'destination' : ipA, 'nexthop' : ipB}
+       ipAs.append(routes) 
 
-ipAs = []
-for i in range(len(alpha)):
-  ipA = ('10.' + str(int(targets[alpha[i]]) + 1) + '.0.0/24')
-  ipB = ('10.' + str(3) + '.0.' + str(int(targets[alpha[i]]) + 3))
-  routes = {'destination' : ipA, 'nexthop' : ipB}
-  ipAs.append(routes)
-
-print ipAs
-
-ipBs = []
-for i in range(len(belta)):
-  ipA = ('10.' + str(int(sources[belta[i]]) + 1) + '.0.0/24')
-  ipB = ('10.' + str(1) + '.0.' + str(int(sources[belta[i]]) + 3))
-  routes = {'destination' : ipA, 'nexthop' : ipB}
-  ipBs.append(routes)
-
-print ipBs
-
-print ipAs + ipBs
+    for i in range(len(belta)):
+       ipA = ('10.' + str(int(sources[belta[i]]) + 1) + '.0.0/24')
+       ipB = ('10.' + str(int(value) + 1) + '.0.' + str(int(sources[belta[i]]) + 3))
+       routes = {'destination' : ipA, 'nexthop' : ipB}
+       ipBs.append(routes) 
+    return ipAs + ipBs
 
 for i in range(len(Nes)):
     #ips = []
@@ -175,7 +168,7 @@ for i in range(len(Nes)):
     data[Nes[i]]['properties'] = {'network_id' : {'get_resource' : Nodes[i]},
                                 'name' : Names[i],
                                 'cidr' : '10.' + str(i + 1) + '.0.0/24',
-                                'host_routes' : 5555
+                                'host_routes' : setHostRoutes(i)
                                 }
     ###########################################################
 
